@@ -16,16 +16,18 @@ This project showcases techniques for optimizing component loading and hydration
 4. **AsyncMyComponentOnToggle**
    - **Async Loaded:** Not part of the initial chunk. Loads asynchronously when toggled on via a button. Lifecycle methods run after loading and toggling on.
 
+### Notes
+
+These components do not appear to be working as expected and do not prevent hydration from what I can tell.
+
 5. **MyComponentWhenIdle**
    - **Lazy Hydration:** Hydration is delayed until the browser is idle or after a 2000ms timeout.
 
 6. **MyComponentWhenVisible**
    - **Lazy Hydration:** Hydration is delayed until the component becomes visible in the viewport.
 
-### Notes
-
 7. **MyComponentOnInteraction**
-   - Hydration is supposed to be delayed until the user interacts with the component (e.g., click or focus), but the lifecycle methods still fire.
+   - **Lazy Hydration:** Hydration is delayed until the user interacts with the component (e.g., click or focus).
 
 8. **MyComponentOnTrigger**
-   - Hydration is intended to be manually triggered by a button click, but the lifecycle methods of the component and click events of the button still fire.
+   - **Lazy Hydration:** Hydration is manually triggered by a variable.
