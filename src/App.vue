@@ -49,16 +49,6 @@
 
     <!--
     - IS in the chunk for this component
-    - Hydration will be delayed until the component becomes visible in the viewport
-    -->
-    <div class="component">
-      <LazyHydrationWrapper :when-visible="{ rootMargin: '50px' }">
-        <MyComponentWhenVisible />
-      </LazyHydrationWrapper>
-    </div>
-
-    <!--
-    - IS in the chunk for this component
     - Hydration will be delayed until the user interacts with the component (e.g., click or focus)
     -->
     <div class="component">
@@ -75,6 +65,16 @@
       <button @click="triggerMyComponentOnTriggerHydration">Trigger Hydration</button>
       <LazyHydrationWrapper :when-triggered="hydrateMyComponentOnTrigger" @hydrated="onHydrateMyComponentOnTrigger">
         <MyComponentOnTrigger :hydrated="hydrateMyComponentOnTrigger" />
+      </LazyHydrationWrapper>
+    </div>
+
+    <!--
+    - IS in the chunk for this component
+    - Hydration will be delayed until the component becomes visible in the viewport
+    -->
+    <div class="component component--below-the-fold">
+      <LazyHydrationWrapper :when-visible="{ rootMargin: '50px' }" @hydrated="onHydrateMyComponentWhenVisible">
+        <MyComponentWhenVisible />
       </LazyHydrationWrapper>
     </div>
   </div>
@@ -134,6 +134,9 @@ export default {
     onHydrateMyComponentOnTrigger() {
       console.log('MyComponentOnTrigger hydrated!');
     },
+    onHydrateMyComponentWhenVisible() {
+      console.log('MyComponentWhenVisible hydrated!');
+    },
   },
 };
 </script>
@@ -143,5 +146,9 @@ export default {
   border: 1px dotted #000;
   padding: 1em;
   margin: 1em;
+}
+
+.component--below-the-fold {
+  margin-top: 100vh;
 }
 </style>
